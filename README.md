@@ -17,7 +17,23 @@ ___                   _____      _____
     
 VRC (VLC Voice Remote Control) is an Android App to remotely control VLC over HTTP with your voice.
 
-### Currently supported command (french only):
+### Usage:
+Please note that this application is not ready for release yet, especially when it comes to user interface.
+
+#### On your computer
+Start VLC. **Note that your computer and your Android Phone *must* be connected to the same network** (e.g. the same router, Freebox or whatever).
+
+Click on "View > Add Interface > Web".
+
+#### On your Android device
+Once installed, run the application and go to "Menu > Settings", and set up the two configuration items:
+ * Host IP: here write the **local** IP address of the computer running VLC. That means that it is not the IP displayed on whatismyip.com etc., but the IP you can find in your operating system network settings. If it is an IPv4 address, it probably looks like "192.168.0.X". Just change the last number accordingly.
+ * VLC HTTP port: if you have not changed the VLC settings, you probably don't need to change this setting.
+
+Now you can go back to the app. When you want to give an order to VLC, hit the "listen" button and just say the command you want. Just wait one or two seconds to see if it worked. There is no "in app" feedback yet but it is planned.
+
+
+### Currently supported commands (french only):
  * Play / Pause (Lecture / Pause) : « Commencer la lecture », « Reprendre la lecture », « Mettre en pause »;
  * Redo (Refaire, ré-exécute la dernière commande) : « Encore », « Encore une fois »;
  * Stop (Arrêter) : « Arrêter », « Stop »;
