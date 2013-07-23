@@ -34,14 +34,17 @@ Now you can go back to the app. When you want to give an order to VLC, hit the "
 
 
 ### Currently supported commands (french only):
- * Play / Pause (Lecture / Pause) : « Commencer la lecture », « Reprendre la lecture », « Mettre en pause »;
- * Redo (Refaire, ré-exécute la dernière commande) : « Encore », « Encore une fois »;
- * Stop (Arrêter) : « Arrêter », « Stop »;
- * Restart (Recommencer) : « Recommencer », « Recommencer la lecture »;
- * Volume up (Monter le son) : « Augmenter le volume », « Monter le son »;
- * Volume down (Baisser le son) : « Diminuer le volume », « Baisser le son »;
- * Stop (Arrêter) : « Arrêter », « Stop »;
- * Toggle fullscreen (Basculer le mode plein écran) : « Basculer le mode plein écran », « Entrer en mode plein écran », « Sortir du mode plein écran »;
+ * Command name [French command name] (details/détails): « Sentence to say to run the command », « Phrase à prononcer pour lancer la commande »
+ * Play / Pause [Lecture / Pause]: « Commencer la lecture », « Reprendre la lecture », « Mettre en pause »;
+ * Redo [Refaire] (run the last command again/ré-exécute la dernière commande): « Encore », « Encore une fois »;
+ * Stop [Arrêter]: « Arrêter », « Stop »;
+ * Restart [Recommencer] (stop + play): « Recommencer », « Recommencer la lecture »;
+ * Volume up [Monter le son]: « Augmenter le volume », « Monter le son »;
+ * Volume down [Baisser le son]: « Diminuer le volume », « Baisser le son »;
+ * Mute [Muet]: « Couper le son »;
+ * Reset volume [Ré-initialiser le volume sonore] (set back the volume to 100%/remet le volume à 100%): « Remettre le son »;
+ * Stop [Arrêter]: « Arrêter », « Stop »;
+ * Toggle fullscreen [Basculer le mode plein écran] : « Basculer le mode plein écran », « Entrer en mode plein écran », « Sortir du mode plein écran »;
 
 ### Future improvements:
  * Implement a VLC shutdown command;
