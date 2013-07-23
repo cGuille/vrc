@@ -1,3 +1,4 @@
+```
 ___                   _____      _____ 
 \  \                 /  /| |    / ____|
  \  \               /  / | |   | |    
@@ -12,6 +13,6 @@ ___                   _____      _____
           \___/      \___/|_|\___\___| |_| \_\___|_| |_| |_|\___/ \__\___|  \____\___/|_| |_|\__|_|  \___/|_|
 
                       
-
+```
     
 VRC (Voice VLC Remote Control) is an Android App to remotely control VLC over HTTP with your voice.
