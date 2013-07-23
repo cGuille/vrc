@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	
+	<EditTextPreference
+		android:key="pref_vlc_host_ip"
+		android:title="@string/pref_vlc_host_ip_title"
+		android:dialogTitle="@string/pref_vlc_host_ip_title"
+		android:defaultValue="@string/pref_vlc_host_default_ip"
+		android:summary="@string/pref_vlc_host_ip_summary" />
+	
+	<EditTextPreference
+		android:key="pref_vlc_http_port"
+		android:title="@string/pref_vlc_http_port_title"
+		android:dialogTitle="@string/pref_vlc_http_port_title"
+		android:defaultValue="@string/pref_vlc_default_http_port"
+		android:summary="@string/pref_vlc_http_port_summary" />
+</PreferenceScreen>

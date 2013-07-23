@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- App & main activity -->
+    <string name="app_name">vrc</string>
+    <string name="app_name_hr">VRC</string>
+    <string name="main_activity_title">VRC</string>
+    <string name="action_settings">Settings</string>
+    <string name="button_listen">Start listening</string>
+    
+    <!--  Preferences -->
+    <string name="pref_vlc_host_ip_title">Host IP</string>
+    <string name="pref_vlc_host_default_ip">192.168.0.1</string>
+    <string name="pref_vlc_host_ip_summary">The reachable IP address of the computer where VLC is running.</string>
+    
+    <string name="pref_vlc_http_port_title">VLC HTTP port</string>
+    <string name="pref_vlc_default_http_port">8080</string>
+    <string name="pref_vlc_http_port_summary">The HTTP port that VLC is listening to. Make sure the VLC Web Interface is enabled (View > Add Interface > Web).</string>
+
+</resources>
