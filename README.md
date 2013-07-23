@@ -46,4 +46,5 @@ Now you can go back to the app. When you want to give an order to VLC, hit the "
 ### Future improvements:
  * Implement a VLC shutdown command;
  * Implement playlist management commands;
- * Create a real GUI (with **feedback**).
+ * Create a real GUI (with **feedback**);
+ * Internationalization.
