@@ -7,6 +7,15 @@
     <string name="main_activity_title">VRC</string>
     <string name="action_settings">Settings</string>
     <string name="button_listen">Start listening</string>
+
+    <string name="could_not_find_command">I did not understand… could you repeat, please?</string>
+    <string name="error_vlc_unreachable">Error: could not connect to VLC.\n\nIs VLC running with its network/web interface enabled?\n\nIf so, Check if the VLC host ip &amp; port are well configured (see Menu → Settings in this app)</string>
+
+    <string name="command_executed">Command executed:</string>
+    <string name="hr_command_pl_pause">Play/Pause</string>
+    <string name="hr_command_pl_stop">Stop</string>
+    <string name="hr_command_volume">Volume change</string>
+    <string name="hr_command_fullscreen">Toggle fullscreen</string>
     
     <!--  Preferences -->
     <string name="pref_vlc_host_ip_title">Host IP</string>
