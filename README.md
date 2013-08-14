@@ -80,6 +80,11 @@ Then you're done.
 **Note that for basic usage, your computer and your Android Phone *must* be connected to the same network** (e.g. the same router, Freebox or whatever).
 
 #### On your Android device
+ * [Download the VRC APK](http://publisher.guillaumecharmetant.com/vrc.apk);
+ * Hit the APK file on your Android device to install the app.
+
+Note that I do not guarantee this APK file to be up-to-date.
+
 Once installed, run the application, go to `Menu` → `Settings`, and set up the two configuration items:
  * **Host IP**: here write the **local** IP address of the computer running VLC. That means that it is not the IP displayed on whatismyip.com etc., but the IP you can find in your operating system network settings ([look here to learn how to find it](http://kb.iu.edu/data/aapa.html#web)). If it is an IPv4 address, it probably looks like "192.168.0.X". Just change the last number accordingly.
  * **VLC HTTP port**: if you have not changed the VLC settings, you probably don't need to change this setting.
