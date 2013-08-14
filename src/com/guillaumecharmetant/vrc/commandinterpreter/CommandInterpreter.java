@@ -1,21 +1,15 @@
 package com.guillaumecharmetant.vrc.commandinterpreter;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import android.util.Log;
-
 import com.guillaumecharmetant.vlchttpcontroller.VlcHttpCommand;
 import com.guillaumecharmetant.vlchttpcontroller.VlcHttpCommandResponseHandler;
 import com.guillaumecharmetant.vlchttpcontroller.VlcHttpController;
-import com.guillaumecharmetant.vlchttpcontroller.VlcHttpResponse;
 
 public class CommandInterpreter {
-	private static final String TAG = "CI";
-	
 	enum Command {
 		REDO,
 		PLAY_PAUSE,
@@ -70,19 +64,6 @@ public class CommandInterpreter {
 		return new CommandInterpreter(controller, LOCALES.get(locale));
 	}
 	
-	private static final VlcHttpCommandResponseHandler RESPONSE_HANDLER = new VlcHttpCommandResponseHandler() {
-		@Override
-		public void handleResponse(VlcHttpController controller, VlcHttpResponse response) {
-			Log.d(TAG, "[" + String.valueOf(response.getStatusCode()) + "] " + response.getStatusText());
-			Exception error = response.getError();
-			if (error != null) {
-				if (error.getClass() == IOException.class) {
-					Log.d(TAG, "ADVICE: have you started VLC and added the web interface in VLC (View > Add Interface > Web)?");
-				}
-			}
-		}
-	};
-	
 	private LinkedHashMap<Pattern, Command> patterns;
 	private VlcHttpController vlcController;
 	private Command lastCommandType = null;
@@ -98,49 +79,49 @@ public class CommandInterpreter {
 	 * @return The corresponding HTTP command for VLC, or null if any
 	 */
 	// Caution: early return is used
-	public VlcHttpCommand getCommandFor(String message) {
+	public VlcHttpCommand getCommandFor(String message, VlcHttpCommandResponseHandler responseHandler) {
 		for (Pattern pattern : this.patterns.keySet()) {
 			Matcher matcher = pattern.matcher(message);
 			if (matcher.matches()) {
-				return this.createCommand(this.patterns.get(pattern), matcher);
+				return this.createCommand(this.patterns.get(pattern), matcher, responseHandler);
 			}
 		}
 		return null;
 	}
 	
-	private VlcHttpCommand createCommand(Command commandType, Matcher matcher) {
+	private VlcHttpCommand createCommand(Command commandType, Matcher matcher, VlcHttpCommandResponseHandler responseHandler) {
 		VlcHttpCommand command = null;
 		switch (commandType) {
 		case REDO:
 			if (this.getLastCommandType() == null || this.getLastMatcher() == null) {
 				command = null;
 			} else {
-				command = this.createCommand(this.getLastCommandType(), this.getLastMatcher());
+				command = this.createCommand(this.getLastCommandType(), this.getLastMatcher(), responseHandler);
 			}
 			break;
 		case PLAY_PAUSE:
-			command = this.vlcController.createPlayPauseCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createPlayPauseCommand(responseHandler);
 			break;
 		case RESTART:
-			command = this.vlcController.createRestartCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createRestartCommand(responseHandler);
 			break;
 		case STOP:
-			command = this.vlcController.createStopCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createStopCommand(responseHandler);
 			break;
 		case MUTE:
-			command = this.vlcController.createMuteCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createMuteCommand(responseHandler);
 			break;
 		case RESET_VOLUME:
-			command = this.vlcController.createResetVolumeCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createResetVolumeCommand(responseHandler);
 			break;
 		case INCREASE_VOLUME:
-			command = this.vlcController.createIncreaseVolumeCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createIncreaseVolumeCommand(responseHandler);
 			break;
 		case DECREASE_VOLUME:
-			command = this.vlcController.createDecreaseVolumeCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createDecreaseVolumeCommand(responseHandler);
 			break;
 		case TOGGLE_FULLSCREEN:
-			command = this.vlcController.createToggleFullscreenCommand(RESPONSE_HANDLER);
+			command = this.vlcController.createToggleFullscreenCommand(responseHandler);
 			break;
 		default:
 			throw new UnsupportedOperationException("Command not supported yet: " + commandType);

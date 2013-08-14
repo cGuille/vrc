@@ -15,13 +15,15 @@ import org.xml.sax.SAXException;
 
 public class VlcHttpResponse {
 	protected HttpResponse httpResponse;
+	private VlcHttpCommand responseTo;
 	private int statusCode;
 	private String statusText;
 	private Document responseData = null;
 	private Exception error = null;
 	
-	public VlcHttpResponse(HttpResponse httpResponse) {
+	public VlcHttpResponse(VlcHttpCommand responseTo, HttpResponse httpResponse) {
 		this.httpResponse = httpResponse;
+		this.responseTo = responseTo;
 		StatusLine statusLine = httpResponse.getStatusLine();
 		this.statusCode = statusLine.getStatusCode();
 		this.statusText = statusLine.getReasonPhrase();
@@ -48,8 +50,13 @@ public class VlcHttpResponse {
 		}
 	}
 
-	public VlcHttpResponse(Exception e) {
-		 this.error = e;
+	public VlcHttpResponse(VlcHttpCommand responseTo, Exception e) {
+		this.responseTo = responseTo;
+		this.error = e;
+	}
+
+	public VlcHttpCommand getResponseTo() {
+		return responseTo;
 	}
 
 	public int getStatusCode() {

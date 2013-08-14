@@ -1,13 +1,19 @@
 package com.guillaumecharmetant.vrc;
 
 import java.util.ArrayList;
+
+import org.apache.http.conn.HttpHostConnectException;
+
 import com.guillaumecharmetant.vlchttpcontroller.VlcHttpCommand;
+import com.guillaumecharmetant.vlchttpcontroller.VlcHttpCommandResponseHandler;
 import com.guillaumecharmetant.vlchttpcontroller.VlcHttpController;
+import com.guillaumecharmetant.vlchttpcontroller.VlcHttpResponse;
 import com.guillaumecharmetant.vrc.commandinterpreter.CommandInterpreter;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.speech.RecognitionListener;
@@ -17,15 +23,45 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	private static final String TAG = "test";
+	private static final String TAG = "MainAct";
 
 	private static final String DEFAULT_VLC_HOST_IP_KEY = "pref_vlc_host_ip";
 	private static final String DEFAULT_VLC_HTTP_PORT_KEY = "pref_vlc_http_port";
 	
 	private SpeechRecognizer recognizer;
 	private VlcHttpController vlcController;
+	private final VlcHttpCommandResponseHandler responseHandler = new VlcHttpCommandResponseHandler() {
+		@Override
+		public void handleResponse(VlcHttpController controller, VlcHttpResponse response) {
+			Log.d(TAG, "[" + String.valueOf(response.getStatusCode()) + "] " + response.getStatusText());
+			Exception error = response.getError();
+			if (error != null) {
+				if (error.getClass() == HttpHostConnectException.class) {
+					MainActivity.this.showToast(MainActivity.this.getResources().getString(R.string.error_vlc_unreachable));
+				} else {
+					Log.e(TAG, error.getClass().getName() + ": " + error.getMessage());
+					MainActivity.this.showToast("Unexpected error: " + error.getMessage());
+				}
+			} else {
+				String message = MainActivity.this.getResources().getString(R.string.command_executed) + " ";
+				String cmdName = response.getResponseTo().getName();
+				if (cmdName.contains("&")) {
+					cmdName = cmdName.substring(0, cmdName.indexOf("&"));
+				}
+				message += MainActivity.this.getResourceString("hr_command_" + cmdName);
+				MainActivity.this.showToast(message);
+			}
+			MainActivity.this.statusIndicator.setVisibility(ProgressBar.INVISIBLE);
+		}
+	};
+
+	private Button listenButton;
+	private ProgressBar statusIndicator;
 	
 	class STTHandler implements RecognitionListener {
 		private CommandInterpreter commandInterpreter;
@@ -36,36 +72,49 @@ public class MainActivity extends Activity {
 
 		@Override
 		public void onResults(Bundle results) {
+			MainActivity.this.statusIndicator.setVisibility(ProgressBar.VISIBLE);
+			boolean commandFound = false;
+
 			ArrayList<String> possibleSentences = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 			for (String sentence : possibleSentences) {
 				log("heard: " + sentence);
-				VlcHttpCommand command = this.commandInterpreter.getCommandFor(sentence);
+				VlcHttpCommand command = this.commandInterpreter.getCommandFor(sentence, MainActivity.this.responseHandler);
 				if (command != null) {
 					log("executing: " + command);
+					commandFound = true;
 					command.execute();
 					break;
 				}
+			}
+
+			if (!commandFound) {
+				MainActivity.this.statusIndicator.setVisibility(ProgressBar.INVISIBLE);
+				MainActivity.this.showToast(MainActivity.this.getResources().getString(R.string.could_not_find_command));
 			}
 		}
 		
 		@Override
 		public void onReadyForSpeech(Bundle params) {
 			log("ready for speech");
-		}
-		
-		@Override
-		public void onError(int error) {
-			Log.e("listener", "Error: " + String.valueOf(error));
-		}
-		
-		@Override
-		public void onEndOfSpeech() {
-			log("speech end");
+			MainActivity.this.listenButton.setEnabled(false);
 		}
 		
 		@Override
 		public void onBeginningOfSpeech() {
 			log("speech beginning");
+		}
+		
+		@Override
+		public void onEndOfSpeech() {
+			log("speech end");
+			MainActivity.this.listenButton.setEnabled(true);
+		}
+		
+		@Override
+		public void onError(int error) {
+			Log.e("listener", "Error: " + String.valueOf(error));
+			MainActivity.this.showToast(MainActivity.this.getResources().getString(R.string.could_not_find_command));
+			MainActivity.this.listenButton.setEnabled(true);
 		}
 		
 		@Override
@@ -108,6 +157,9 @@ public class MainActivity extends Activity {
 //        }
         
         setContentView(R.layout.activity_main);
+        this.listenButton = (Button) this.findViewById(R.id.button_listen);
+        this.statusIndicator = (ProgressBar) this.findViewById(R.id.status_indicator);
+        this.statusIndicator.setVisibility(ProgressBar.INVISIBLE);
         Log.d(TAG, "on create");
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -165,4 +217,21 @@ public class MainActivity extends Activity {
 		intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 5); 
 		this.recognizer.startListening(intent);
     }
+
+	private void showToast(String textContent) {
+		Toast toast = Toast.makeText(getApplicationContext(), textContent, Toast.LENGTH_LONG);
+		toast.show();
+	}
+
+    /*
+     * Adapted from: http://stackoverflow.com/questions/3648942/dynamic-resource-loading-android
+     */
+	public String getResourceString(String name) {
+		Context context = getApplicationContext();
+		int nameResourceID = context.getResources().getIdentifier(name, "string", context.getApplicationInfo().packageName);
+		if (nameResourceID == 0) {
+			throw new IllegalArgumentException("No resource string found with name " + name);
+		}
+		return context.getString(nameResourceID);
+	}
 }

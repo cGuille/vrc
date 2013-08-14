@@ -104,7 +104,7 @@ public class VlcHttpController {
 	}
 	
 	private VlcHttpCommand createCommand(String name, VlcHttpCommandResponseHandler responseHandler) {
-		return new VlcHttpCommand(this, this.createCommandURI(name), responseHandler);
+		return new VlcHttpCommand(this, name, this.createCommandURI(name), responseHandler);
 	}
 	
 	public VlcHttpCommand createPlayPauseCommand(VlcHttpCommandResponseHandler responseHandler) {
@@ -154,7 +154,7 @@ public class VlcHttpController {
 
 	// debug:
 	public void TEST() throws URISyntaxException {
-		new VlcHttpCommand(this, new URI(this.vlcPlaylistUrl), new VlcHttpCommandResponseHandler() {
+		new VlcHttpCommand(this, "TEST PLAYLIST", new URI(this.vlcPlaylistUrl), new VlcHttpCommandResponseHandler() {
 			@Override
 			public void handleResponse(VlcHttpController controller, VlcHttpResponse response) {
 				Log.d("TEST", response.getStatusText());
