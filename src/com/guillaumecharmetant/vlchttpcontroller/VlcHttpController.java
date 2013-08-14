@@ -18,6 +18,7 @@ public class VlcHttpController {
 	private static final String ENCODING = "UTF-8";
 	private static final String URLENCODED_PLUS;
 	private static final String URLENCODED_MINUS;
+	@SuppressWarnings("unused")
 	private static final String URLENCODED_PERCENT;
 	static {
 		String urlEncodedPlus;
@@ -143,7 +144,7 @@ public class VlcHttpController {
 	}
 	
 	public VlcHttpCommand createResetVolumeCommand(VlcHttpCommandResponseHandler responseHandler) {
-		return this.createCommand(CMD_VOLUME + "100" + URLENCODED_PERCENT, responseHandler);
+		return this.createCommand(CMD_VOLUME + "256", responseHandler);
 	}
 	
 	public VlcHttpCommand createToggleFullscreenCommand(VlcHttpCommandResponseHandler responseHandler) {
