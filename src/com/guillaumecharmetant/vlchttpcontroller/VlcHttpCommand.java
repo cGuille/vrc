@@ -14,6 +14,7 @@ public class VlcHttpCommand extends AsyncTask<Void, Integer, VlcHttpResponse> {
 
 	public VlcHttpCommand(VlcHttpController controller, String name, URI commandURI, VlcHttpCommandResponseHandler responseHandler) {
 		this.controller = controller;
+		this.name = name;
 		this.request = new HttpGet(commandURI);
 		this.setResponseHandler(responseHandler);
 	}
