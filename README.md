@@ -84,7 +84,7 @@ Once installed, run the application, go to `Menu` → `Settings`, and set up th
  * **Host IP**: here write the **local** IP address of the computer running VLC. That means that it is not the IP displayed on whatismyip.com etc., but the IP you can find in your operating system network settings ([look here to learn how to find it](http://kb.iu.edu/data/aapa.html#web)). If it is an IPv4 address, it probably looks like "192.168.0.X". Just change the last number accordingly.
  * **VLC HTTP port**: if you have not changed the VLC settings, you probably don't need to change this setting.
 
-Now you can go back to the app. When you want to give an order to VLC, hit the `Start listening` button and just say the command you want. Wait a few seconds to see if it worked. There is no "in app" feedback yet but it is planned.
+Now you can go back to the app. When you want to give an order to VLC, hit the `Start listening` button and just say the command you want. Wait a few seconds to see if it worked. You should see a little message telling you what happened fading in and out.
 
 
 ### Currently supported commands (french only):
@@ -101,7 +101,7 @@ Now you can go back to the app. When you want to give an order to VLC, hit the `
  * Toggle fullscreen [Basculer le mode plein écran] : « Basculer le mode plein écran », « Entrer en mode plein écran », « Sortir du mode plein écran »;
 
 ### Future improvements:
- * Implement a VLC shutdown command;
  * Implement playlist management commands;
- * Create a real GUI (with **feedback**);
+ * Implement a feature that automatically checks if the VLC HTTP interface is reachable;
+ * Create a nice GUI;
  * Internationalization.
