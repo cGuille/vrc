@@ -164,6 +164,6 @@ public class VlcHttpController {
 	}
 
 	public String createVlcCommandURL(String command) {
-		return this.vlcCommandBaseUrl + command + "&id=8";// &id=8 debug purpose
+		return this.vlcCommandBaseUrl + command;
 	}
 }
