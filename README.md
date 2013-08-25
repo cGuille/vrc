@@ -92,6 +92,8 @@ Now you can go back to the app. When you want to give an order to VLC, hit the `
  * Play / Pause [Lecture / Pause]: « Commencer la lecture », « Reprendre la lecture », « Mettre en pause »;
  * Redo [Refaire] - (run the last command again/ré-exécute la dernière commande): « Encore », « Encore une fois »;
  * Stop [Arrêter]: « Arrêter », « Stop »;
+ * Previous [Précédent]: « Précédent »;
+ * Next [Suivant]: « Suviant »;
  * Restart [Recommencer] - (stop + play): « Recommencer », « Recommencer la lecture »;
  * Volume up [Monter le son]: « Augmenter le volume », « Monter le son »;
  * Volume down [Baisser le son]: « Diminuer le volume », « Baisser le son »;
