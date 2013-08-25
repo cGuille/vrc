@@ -92,7 +92,7 @@ Once installed, run the application, go to `Menu` → `Settings`, and set up th
 Now you can go back to the app. When you want to give an order to VLC, hit the `Start listening` button and just say the command you want. Wait a few seconds to see if it worked. You should see a little message telling you what happened fading in and out.
 
 
-### Currently supported commands (**french only**):
+### Currently supported commands (french only):
  * Command name [French command name] - (details/détails): « Sentence to say to run the command », « Phrase à prononcer pour lancer la commande »
  * Play / Pause [Lecture / Pause]: « Commencer la lecture », « Reprendre la lecture », « Mettre en pause »;
  * Redo [Refaire] - (run the last command again/ré-exécute la dernière commande): « Encore », « Encore une fois »;
