@@ -46,6 +46,8 @@ public class VlcHttpController {
 
 	private static final String CMD_PLAY_PAUSE = "pl_pause";
 	private static final String CMD_STOP = "pl_stop";
+	private static final String CMD_PREVIOUS = "pl_previous";
+	private static final String CMD_NEXT = "pl_next";
 	private static final String CMD_VOLUME = "volume&val=";
 	private static final String CMD_TOGGLE_FULLSCREEN = "fullscreen";
 	
@@ -131,6 +133,14 @@ public class VlcHttpController {
 		return this.createCommand(CMD_STOP, responseHandler);
 	}
 	
+	public VlcHttpCommand createGoPreviousCommand(VlcHttpCommandResponseHandler responseHandler) {
+		return this.createCommand(CMD_PREVIOUS, responseHandler);
+	}
+
+	public VlcHttpCommand createGoNextCommand(VlcHttpCommandResponseHandler responseHandler) {
+		return this.createCommand(CMD_NEXT, responseHandler);
+	}
+
 	public VlcHttpCommand createIncreaseVolumeCommand(VlcHttpCommandResponseHandler responseHandler) {
 		return this.createCommand(CMD_VOLUME + URLENCODED_PLUS + String.valueOf(VOLUME_STEP), responseHandler);
 	}

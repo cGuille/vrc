@@ -15,6 +15,8 @@ public class CommandInterpreter {
 		PLAY_PAUSE,
 		RESTART,
 		STOP,
+		PREVIOUS,
+		NEXT,
 		MUTE,
 		RESET_VOLUME,
 		INCREASE_VOLUME,
@@ -39,6 +41,10 @@ public class CommandInterpreter {
 		frPatterns.put(pattern("^((suspend(s|re)?)|(met(s|tre)? en )?pause)$"), Command.PLAY_PAUSE);
 		//stop
 		frPatterns.put(pattern("^(stop|arrêter?)$"), Command.STOP);
+		//previous
+		frPatterns.put(pattern("^précédente?$"), Command.PREVIOUS);
+		//next
+		frPatterns.put(pattern("^suivante?$"), Command.NEXT);
 		//restart
 		frPatterns.put(pattern("^recommencer?( la lecture)?$"), Command.RESTART);
 		//mute
@@ -107,6 +113,12 @@ public class CommandInterpreter {
 			break;
 		case STOP:
 			command = this.vlcController.createStopCommand(responseHandler);
+			break;
+		case PREVIOUS:
+			command = this.vlcController.createGoPreviousCommand(responseHandler);
+			break;
+		case NEXT:
+			command = this.vlcController.createGoNextCommand(responseHandler);
 			break;
 		case MUTE:
 			command = this.vlcController.createMuteCommand(responseHandler);

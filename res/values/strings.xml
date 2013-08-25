@@ -14,6 +14,8 @@
     <string name="command_executed">Command executed:</string>
     <string name="hr_command_pl_pause">Play/Pause</string>
     <string name="hr_command_pl_stop">Stop</string>
+    <string name="hr_command_pl_previous">Previous</string>
+    <string name="hr_command_pl_next">Next</string>
     <string name="hr_command_volume">Volume change</string>
     <string name="hr_command_fullscreen">Toggle fullscreen</string>
     
